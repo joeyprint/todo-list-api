@@ -1,6 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Todo } from './todo/entities/todo.entity';
 
 @Controller()
 export class AppController {
