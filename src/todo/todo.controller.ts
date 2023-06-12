@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoEntity } from './entities/todo.entity';
@@ -60,8 +59,10 @@ export class TodoController {
     return mappedTodo;
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.todoService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string): { id: string } {
+    this.todoService.delete(id);
+
+    return { id };
+  }
 }
