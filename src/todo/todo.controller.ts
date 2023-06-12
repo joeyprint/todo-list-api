@@ -42,10 +42,23 @@ export class TodoController {
     return this.todoService.get(id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
-  //   return this.todoService.update(+id, updateTodoDto);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateTodoDto: UpdateTodoDto,
+  ): TodoEntity {
+    const updatedAt = new Date().toISOString();
+    const data = this.todoService.get(id);
+
+    const mappedTodo = {
+      ...data,
+      ...updateTodoDto,
+      updatedAt,
+    };
+
+    this.todoService.update(mappedTodo);
+    return mappedTodo;
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {
