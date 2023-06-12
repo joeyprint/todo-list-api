@@ -37,10 +37,10 @@ export class TodoController {
     return this.todoService.getAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.todoService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string): TodoEntity {
+    return this.todoService.get(id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
