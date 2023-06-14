@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
-import { TodoEntity } from './entities/todo.entity';
 import { InMemoryDBService } from '@nestjs-addons/in-memory-db';
 import { randomUUID } from 'crypto';
+
+import { CreateTodoDto } from './dto/create-todo.dto';
+import { UpdateTodoDto } from './dto/update-todo.dto';
+import { TODO_LIST_TYPE, TodoEntity } from './entities/todo.entity';
 
 @Controller('todo')
 export class TodoController {
@@ -21,14 +24,24 @@ export class TodoController {
   create(@Body() createTodoDto: CreateTodoDto): TodoEntity {
     const createdAt = new Date().toISOString();
 
-    const mappedTodo = {
-      id: randomUUID(),
-      title: createTodoDto.title,
-      createdAt,
-      updatedAt: createdAt,
-    };
+    switch (createTodoDto?.type) {
+      case TODO_LIST_TYPE.TODO:
+      case TODO_LIST_TYPE.DOING:
+      case TODO_LIST_TYPE.DONE:
+        const mappedTodo = {
+          id: randomUUID(),
+          title: createTodoDto.title,
+          type: createTodoDto?.type ?? TODO_LIST_TYPE.TODO,
+          createdAt,
+          updatedAt: createdAt,
+        };
 
-    return this.todoService.create(mappedTodo);
+        return this.todoService.create(mappedTodo);
+      default:
+        throw new HttpException('Bad Requested', HttpStatus.BAD_REQUEST, {
+          description: "Type doesn't match",
+        });
+    }
   }
 
   @Get()
@@ -49,14 +62,23 @@ export class TodoController {
     const updatedAt = new Date().toISOString();
     const data = this.todoService.get(id);
 
-    const mappedTodo = {
-      ...data,
-      ...updateTodoDto,
-      updatedAt,
-    };
+    switch (updateTodoDto?.type) {
+      case TODO_LIST_TYPE.TODO:
+      case TODO_LIST_TYPE.DOING:
+      case TODO_LIST_TYPE.DONE:
+        const mappedTodo = {
+          ...data,
+          ...updateTodoDto,
+          updatedAt,
+        };
 
-    this.todoService.update(mappedTodo);
-    return mappedTodo;
+        this.todoService.update(mappedTodo);
+        return mappedTodo;
+      default:
+        throw new HttpException('Bad Requested', HttpStatus.BAD_REQUEST, {
+          description: "Type doesn't match",
+        });
+    }
   }
 
   @Delete(':id')
