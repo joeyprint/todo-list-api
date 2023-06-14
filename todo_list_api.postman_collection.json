@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"homework\"\n}",
+					"raw": "{\n    \"title\": \"homework\",\n    \"type\": \"TODO\" // TODO, DOING, DONE\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -57,14 +57,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/todo/a20fa6fc-f7e5-4ca9-bebd-ac43fbd49053",
+					"raw": "localhost:3000/todo/b374173a-bf7f-46cc-a67c-88abcf61544e",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"todo",
-						"a20fa6fc-f7e5-4ca9-bebd-ac43fbd49053"
+						"b374173a-bf7f-46cc-a67c-88abcf61544e"
 					]
 				}
 			},
@@ -77,7 +77,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"test\"\n}",
+					"raw": "{\n    \"title\": \"Frontend Grooming\",\n    \"type\": \"DOING\" // TODO, DOING, DONE\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,14 +85,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/todo/a20fa6fc-f7e5-4ca9-bebd-ac43fbd49053",
+					"raw": "localhost:3000/todo/b374173a-bf7f-46cc-a67c-88abcf61544e",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"todo",
-						"a20fa6fc-f7e5-4ca9-bebd-ac43fbd49053"
+						"b374173a-bf7f-46cc-a67c-88abcf61544e"
 					]
 				}
 			},
@@ -104,14 +104,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/todo/12bfa5a5-16ff-46e2-b375-d0c682a28f03",
+					"raw": "localhost:3000/todo/b374173a-bf7f-46cc-a67c-88abcf61544e",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"todo",
-						"12bfa5a5-16ff-46e2-b375-d0c682a28f03"
+						"b374173a-bf7f-46cc-a67c-88abcf61544e"
 					]
 				}
 			},
